@@ -84,8 +84,8 @@ def create_maintenance():
     description = input("Enter the maintenance description: ")
     date_performed = input("Enter the date performed: ")
     try:
-        # Assuming maintenance_id is generated automatically or provided
-        maintenance_id = int(input("Enter the maintenance ID: "))  # You may adjust how you obtain this ID
+        # Adjusted to use 'id' instead of 'maintenance_id'
+        maintenance_id = int(input("Enter the maintenance ID: "))
         maintenance = Maintenance(maintenance_id, car_vin, maintenance_type, description, date_performed)
         maintenance.save()
         print(f'Success: {maintenance}')
@@ -120,6 +120,7 @@ def delete_maintenance():
         print(f'Successfully deleted maintenance: {maintenance}')
     else:
         print(f'Maintenance with ID {id_} not found')
+
 
 def list_comments():
     comments = Comment.get_all()

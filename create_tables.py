@@ -13,14 +13,14 @@ CREATE TABLE cars (
 """
 
 CREATE_MAINTENANCE_TABLE_QUERY = """
-CREATE TABLE  maintenance (
-    id INTEGER PRIMARY KEY,
-    car_vin TEXT,
-    maintenance_type TEXT,
-    description TEXT,
-    date_performed TEXT,
-    FOREIGN KEY (car_vin) REFERENCES cars (vin)
-);
+  CREATE TABLE maintenance (
+            id INTEGER PRIMARY KEY,
+            car_vin TEXT NOT NULL,
+            maintenance_type TEXT NOT NULL,
+            description TEXT NOT NULL,
+            date_performed DATE NOT NULL
+        )
+    
 """
 
 CREATE_COMMENT_TABLE_QUERY = """

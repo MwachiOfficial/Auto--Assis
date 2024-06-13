@@ -1,8 +1,8 @@
 import sqlite3
 
 class Maintenance:
-    def __init__(self, maintenance_id, car_vin, maintenance_type, description, date_performed):
-        self.maintenance_id = maintenance_id
+    def __init__(self, id_, car_vin, maintenance_type, description, date_performed):
+        self.id = id_
         self.car_vin = car_vin
         self.maintenance_type = maintenance_type
         self.description = description
@@ -12,8 +12,9 @@ class Maintenance:
         conn = sqlite3.connect("car_management.db")
         cursor = conn.cursor()
         
+        
         # Fetch the existing record to compare
-        cursor.execute("SELECT * FROM maintenance WHERE maintenance_id=?", (self.maintenance_id,))
+        cursor.execute("SELECT * FROM maintenance WHERE id=?", (self.id,))
         existing_record = cursor.fetchone()
         
         # Compare fields to decide between INSERT or UPDATE
@@ -21,14 +22,14 @@ class Maintenance:
             # Update existing record
             cursor.execute("""
                 UPDATE maintenance SET car_vin=?, maintenance_type=?, description=?, date_performed=?
-                WHERE maintenance_id=?
-            """, (self.car_vin, self.maintenance_type, self.description, self.date_performed, self.maintenance_id))
+                WHERE id=?
+            """, (self.car_vin, self.maintenance_type, self.description, self.date_performed, self.id))
         else:
             # Insert new record
             cursor.execute("""
-                INSERT INTO maintenance (maintenance_id, car_vin, maintenance_type, description, date_performed)
+                INSERT INTO maintenance (id, car_vin, maintenance_type, description, date_performed)
                 VALUES (?,?,?,?,?)
-            """, (self.maintenance_id, self.car_vin, self.maintenance_type, self.description, self.date_performed))
+            """, (self.id, self.car_vin, self.maintenance_type, self.description, self.date_performed))
         
         conn.commit()
         conn.close()
@@ -43,10 +44,10 @@ class Maintenance:
         return maintenances
 
     @classmethod
-    def find_by_id(cls, maintenance_id):
+    def find_by_id(cls, id_):
         conn = sqlite3.connect("car_management.db")
         cursor = conn.cursor()
-        cursor.execute("SELECT * FROM maintenance WHERE maintenance_id=?", (maintenance_id,))
+        cursor.execute("SELECT * FROM maintenance WHERE id=?", (id_,))
         maintenance_tuple = cursor.fetchone()
         conn.close()
         if maintenance_tuple:
@@ -57,6 +58,6 @@ class Maintenance:
     def delete(self):
         conn = sqlite3.connect("car_management.db")
         cursor = conn.cursor()
-        cursor.execute("DELETE FROM maintenance WHERE maintenance_id=?", (self.maintenance_id,))
+        cursor.execute("DELETE FROM maintenance WHERE id=?", (self.id,))
         conn.commit()
         conn.close()
