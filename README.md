@@ -1,7 +1,7 @@
 
-# Car Management System
+# AutoAssist
 ## Overview
-The Car Management System is a command-line application designed to manage cars, their maintenance records, and associated comments. The system allows users to perform CRUD (Create, Read, Update, Delete) operations on cars, maintenance records, and comments.
+AutoAssist is a command-line application designed to manage cars, their maintenance records, and associated comments. The system allows users to perform CRUD (Create, Read, Update, Delete) operations on cars, maintenance records, and comments.
 
 # Features
 Car Management: Add, view, update, and delete car information.
@@ -11,7 +11,7 @@ Installation
 Clone the repository:
 
 
-## cd car-management-system
+## cd Auto--Assist
 ## Set up the virtual environment:
 
 
